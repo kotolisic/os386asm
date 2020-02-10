@@ -50,10 +50,12 @@ irq_ps2:
         mov     [ps2.daty], al
         mov     ah, $AE
         call    kb_cmd          ; Разблокировка клавиатуры
+
+        ; Разбор ответа
         test    [ps2.cmd], $10  ; Расширение знака
         je      @f
         or      [ps2.datx], $80
-@@:     test    [ps2.cmd], $20
+@@:     test    [ps2.cmd],  $20
         je      @f
         or      [ps2.daty], $80
 
